@@ -1,0 +1,72 @@
+
+<html>
+	<head>
+	<title>Access LC</title>
+
+<SCRIPT LANGUAGE="JavaScript">
+
+var total_erreur=0;
+
+function Check() {
+	var tabc=Check.arguments; var ok=0;
+	var tab="                   azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN0123456789_$&#@";
+	for (var no=0;no<tabc.length;no++) {
+		checksum=tabc[no];
+		// table des caracters autorises
+		var login=document.forms["flog"].elements["login"].value;
+		var password=document.forms["flog"].elements["password"].value;
+		var nblog=login.length;
+		var nbpass=password.length;
+		var sum=1;
+		var n=Math.max(nblog,nbpass)
+		for (var i=0;i<n;i++) {
+			var index1=tab.indexOf(login.substring(i,i+1))+10;
+			var index2=tab.indexOf(password.substring(i,i+1))+10;
+			sum=sum+(index1*n*(i+1))*(index2*(i+1)*(i+1));
+		}
+		
+			
+
+		// calcul de la checksum. La fonction est modifiable !
+		if (sum==checksum) {window.location="index.html"; ok=1; no=100;}
+		// test de la checksum
+	}
+	if (ok==0) {
+		total_erreur++; 
+		alert("Error id or password");
+		if (total_erreur>2) { 
+			alert("You have reached the 3 tries, the page will crash!");
+			window.location="";
+		}
+	}
+
+}
+function Verifie() {
+	Check(3498440,4367299)
+}
+</SCRIPT>
+</HEAD>
+
+<BODY bgcolor="#FFFFFF" alink="#000066" link="#000066" vlink="#000066" >
+<FONT FACE="Arial" SIZE='-1' COLOR="#000099">
+<CENTER><BR>
+
+<!-- LOGIN = zorro - PASSWORD = tornado -->
+<!-- LOGIN = garcia - PASSWORD = jambon -->
+<BR>
+
+<FORM onSubmit="Verifie();return false;" action="#" method="get" name="flog">
+	<TABLE border=0>
+		<TR><TD><FONT size=2 face="arial">Id :</FONT></TD><TD><INPUT name="login" type='text' size=8></TD></TR>
+		<TR><TD><FONT size=2 face="arial">Password :</FONT></TD><TD><INPUT type="text" name="password" size=8></TD></TR>
+		<TR><TD colspan=2 align=center><INPUT type='submit' name="bouton" value='OK'></TD></TR>
+	</TABLE>
+</FORM><BR>
+
+
+</CENTER>
+<BR>
+<BR>
+</BODY>
+</HTML>
+
